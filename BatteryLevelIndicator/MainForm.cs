@@ -44,7 +44,7 @@ namespace BatteryLevelIndicator
             {
                 UpdateVoltage();
                 UpdateIcon();
-                DrawBatteryImage(GetLevelByVoltage(voltage));
+                UpdateFormValues(GetLevelByVoltage(voltage));
             });
         }
 
@@ -131,9 +131,14 @@ namespace BatteryLevelIndicator
             g.FillRectangle(bgBrush, 0, 0, formBG.Width, formBG.Height);
             BackgroundImage = formBG;
             int l = GetLevelByVoltage(voltage);
-            DrawBatteryImage(l);
+            UpdateFormValues(l);
+        }
+
+        private void UpdateFormValues(int level)
+        {
+            DrawBatteryImage(level);
             pictureBox1.Image = batteryBigImg;
-            percentageLabel.Text = l + "%";
+            percentageLabel.Text = level + "%";
             voltageLabel.Text = voltage.ToString("0.00") + " V";
         }
 
